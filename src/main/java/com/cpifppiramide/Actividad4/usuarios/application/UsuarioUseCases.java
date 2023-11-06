@@ -21,8 +21,8 @@ public class UsuarioUseCases {
         return this.usuarioRepository.save(usuario);
     }
 
-    public Usuario update(Integer id, Usuario usuario){
-        return this.usuarioRepository.update(id, usuario);
+    public Usuario update(Integer id, String nombre){
+        return this.usuarioRepository.update(id, nombre);
     }
 
     public String delete(Integer id){

@@ -26,7 +26,10 @@ public class UsuarioRestController {
         return this.usuarioUseCases.save(usuario);
     }
 
-    //TODO falta PutMapping
+    @PutMapping(path = "/usuarios/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Usuario update(@PathVariable Integer id, @RequestBody String nombre){
+        return this.usuarioUseCases.update(id, nombre);
+    }
 
     @DeleteMapping("/usuarios/{id}")
     public String delete(@PathVariable Integer id){

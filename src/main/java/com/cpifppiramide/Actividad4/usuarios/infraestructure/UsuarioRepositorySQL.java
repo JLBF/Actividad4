@@ -4,7 +4,6 @@ import com.cpifppiramide.Actividad4.usuarios.domain.Usuario;
 import com.cpifppiramide.Actividad4.usuarios.domain.UsuarioRepository;
 import com.cpifppiramide.context.ConnectionManager;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,8 +61,44 @@ public class UsuarioRepositorySQL implements UsuarioRepository {
     }
 
     @Override
-    public Usuario update(Integer id, Usuario usuario) {
-        return null;
+    public Usuario update(Integer id, String nombre) {
+        Usuario usuarioActualizar = null;
+        Usuario usuarioActualizado = null;
+
+        try {
+            PreparedStatement ps1 = con.prepareStatement("SELECT * FROM usuarios WHERE id = ?");
+            ps1.setInt(1, id);
+
+            ResultSet rs = ps1.executeQuery();
+            while(rs.next()){
+                usuarioActualizar = new Usuario(
+                        rs.getString("nombre")
+                );
+
+                if(usuarioActualizar.getNombre().equals(nombre)){
+                    usuarioActualizado = usuarioActualizar;
+                }else{
+
+                    usuarioActualizado.setNombre(nombre);
+
+                    PreparedStatement ps2 = con.prepareStatement("UPDATE usuairos SET nombre = ? WHERE id = ?");
+                    ps2.setString(1, usuarioActualizado.getNombre());
+                    ps2.setInt(2, id);
+
+                    ps2.executeUpdate();
+                    ps2.close();
+                }
+
+                ps1.close();
+                rs.close();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        return usuarioActualizado;
     }
 
     @Override

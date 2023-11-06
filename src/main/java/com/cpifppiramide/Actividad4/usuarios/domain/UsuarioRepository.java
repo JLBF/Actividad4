@@ -6,6 +6,6 @@ public interface UsuarioRepository {
 
     public List<Usuario> getAll();
     public Usuario save(Usuario usuario);
-    public Usuario update(Integer id, Usuario usuario);
+    public Usuario update(Integer id, String nombre);
     public String delete(Integer id);
 }
