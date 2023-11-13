@@ -81,7 +81,7 @@ public class UsuarioRepositorySQL implements UsuarioRepository {
 
                     usuarioActualizado.setNombre(nombre);
 
-                    PreparedStatement ps2 = con.prepareStatement("UPDATE usuairos SET nombre = ? WHERE id = ?");
+                    PreparedStatement ps2 = con.prepareStatement("UPDATE usuarios SET nombre = ? WHERE id = ?");
                     ps2.setString(1, usuarioActualizado.getNombre());
                     ps2.setInt(2, id);
 
